@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MirrorMind - Know Yourself Better</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <h1 class="logo">🪞 MirrorMind</h1>
+                <div class="nav-buttons">
+                    <button class="theme-toggle" id="themeToggle">🌙</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Welcome Page -->
+        <section class="page" id="welcomePage">
+            <div class="welcome-content">
+                <div class="welcome-hero">
+                    <h2>You know your name.</h2>
+                    <h3>But do you know yourself?</h3>
+                    <p>Discover your personality, strengths, learning style, and career path with MirrorMind.</p>
+                </div>
+                <div class="welcome-buttons">
+                    <button class="btn btn-primary" onclick="navigateTo('assessmentPage')">Start Your Journey</button>
+                    <button class="btn btn-secondary" onclick="navigateTo('featuresPage')">Explore Features</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Page -->
+        <section class="page" id="featuresPage" style="display: none;">
+            <div class="features-content">
+                <h2>What We Offer</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🧠</span>
+                        <h3>Personality Assessment</h3>
+                        <p>Answer thoughtful questions to discover your personality type and traits.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📚</span>
+                        <h3>Learning Style</h3>
+                        <p>Find your ideal learning method and get personalized study recommendations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💼</span>
+                        <h3>Career Paths</h3>
+                        <p>Get career suggestions based on your strengths and interests.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎯</span>
+                        <h3>Goal Planner</h3>
+                        <p>Set goals, track progress, and earn badges for achievements.</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="navigateTo('assessmentPage')">Begin Assessment</button>
+                <button class="btn btn-outline" onclick="navigateTo('welcomePage')">Back to Home</button>
+            </div>
+        </section>
+
+        <!-- Assessment Page -->
+        <section class="page" id="assessmentPage" style="display: none;">
+            <div class="assessment-content">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">Question 1 of 15</p>
+                
+                <div class="question-card">
+                    <h3 id="questionText"></h3>
+                    <div class="options" id="optionsContainer"></div>
+                </div>
+
+                <div class="assessment-buttons">
+                    <button class="btn btn-outline" id="prevBtn" onclick="previousQuestion()" style="display: none;">← Previous</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Page -->
+        <section class="page" id="resultsPage" style="display: none;">
+            <div class="results-content">
+                <h2>Your Mirror Analysis</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card personality-card">
+                        <h3>Personality Type</h3>
+                        <p class="result-value" id="personalityType">Loading...</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Confidence Level</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" id="confidenceBar"></div>
+                        </div>
+                        <p id="confidenceScore">0%</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Creativity Score</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" id="creativityBar"></div>
+                        </div>
+                        <p id="creativityScore">0%</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Teamwork Score</h3>
+                        <div class="score-bar">
+                            <div class="score-fill" id="teamworkBar"></div>
+                        </div>
+                        <p id="teamworkScore">0%</p>
+                    </div>
+                </div>
+
+                <div class="insights-section">
+                    <h3>Your Strengths</h3>
+                    <div class="strengths-list" id="strengthsList"></div>
+
+                    <h3>Areas to Improve</h3>
+                    <div class="improvements-list" id="improvementsList"></div>
+
+                    <h3>Communication Style</h3>
+                    <p id="communicationStyle"></p>
+
+                    <h3>Learning Style</h3>
+                    <p id="learningStyle"></p>
+
+                    <h3>Career Suggestions</h3>
+                    <div class="careers-list" id="careersList"></div>
+                </div>
+
+                <div class="results-buttons">
+                    <button class="btn btn-primary" onclick="navigateTo('dashboardPage')">Go to Dashboard</button>
+                    <button class="btn btn-outline" onclick="navigateTo('welcomePage')">Start Over</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Page -->
+        <section class="page" id="dashboardPage" style="display: none;">
+            <div class="dashboard-content">
+                <h2>Your Personal Dashboard</h2>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>😊 Confidence</h3>
+                        <canvas id="confidenceChart"></canvas>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>🎨 Creativity</h3>
+                        <canvas id="creativityChart"></canvas>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>🤝 Teamwork</h3>
+                        <canvas id="teamworkChart"></canvas>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>💡 Problem-Solving</h3>
+                        <canvas id="problemSolvingChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="goals-section">
+                    <h3>🎯 Goal Planner</h3>
+                    <div class="goal-input">
+                        <input type="text" id="goalInput" placeholder="Add a new goal...">
+                        <input type="date" id="goalDeadline">
+                        <button class="btn btn-primary" onclick="addGoal()">Add Goal</button>
+                    </div>
+                    <div class="goals-list" id="goalsList"></div>
+                </div>
+
+                <div class="dashboard-buttons">
+                    <button class="btn btn-primary" onclick="navigateTo('assessmentPage')">Retake Assessment</button>
+                    <button class="btn btn-outline" onclick="navigateTo('welcomePage')">Home</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
